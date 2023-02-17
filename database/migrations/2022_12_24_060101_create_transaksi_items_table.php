@@ -16,8 +16,12 @@ return new class extends Migration
         Schema::create('transaksi_items', function (Blueprint $table) {
             $table->id();
             $table->integer('jumlah_produk');
-            $table->integer('produks_id');
-            $table->integer('transaksis_id');
+            $table->foreignId('produks_id')->unsigned();
+            $table->foreign('produks_id')->references('id')
+              ->on('produks');
+            $table->foreignId('transaksis_id')->unsigned();
+            $table->foreign('transaksis_id')->references('id')
+              ->on('transaksis');
             $table->timestamps();
         });
     }

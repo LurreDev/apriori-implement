@@ -23,6 +23,8 @@
 
 @section('content')
     <!-- Basic Bootstrap Table -->
+    @if(Auth::user()->role == 'admin')
+
     <div class="card">
         <h5 class="card-header bg-primary text-white">Data Produk</h5>
         <div class="table-responsive" style="box-shadow: 0 0 4px  gray;">
@@ -40,8 +42,13 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img src="{{ Str::contains($produk->gambar, 'pixabay') ? $produk->gambar : Storage::url($produk->gambar) }}"
-                                    style="width: 100px; height : 100px">
+                                @if ($produk->gambar==0)
+                                <img src="https://solusiskripsi.my.id/asset_front/img/logo.png"
+                                style="width: 100px; height : 100px">
+                                @else
+                                <img src="{{Storage::url("$produk->gambar") }}"
+                                style="width: 100px; height : 100px">
+                                @endif
                             </td>
                             <td>
                                 <i class="fab fa-angular fa-lg text-danger me-3"></i>
@@ -49,10 +56,11 @@
                             </td>
                             <td class="text-end">
                                 <span>Rp. {{ number_format($produk['harga'], 0, ',', '.') }}</span>
+                               
+                                
                                 <a class="btn btn-primary m-2" href="{{ route('produk.edit', $produk->id) }}">
                                     <i class="bx bx-edit-alt me-1 text-white"></i>
                                 </a>
-                                @if (auth()->user()->role === 'admin')
                                     <form method="POST" action="{{ route('produk.destroy', $produk->id) }}"
                                         onsubmit="return confirm('Yakin ingin menghapus' . $produk['nama_produk'] . '?')">
                                         @csrf @method('DELETE')
@@ -60,7 +68,6 @@
                                             <i class="bx bx-trash me-1 text-white"></i>
                                         </button>
                                     </form>
-                                @endif
 
                             </td>
                         </tr>
@@ -69,6 +76,34 @@
             </table>
         </div>
     </div>
+    @endif
+
     <!--/ Basic Bootstrap Table -->
     <hr class="m-5" />
+    @if(Auth::user()->role == 'user')
+
+    <div class="row">
+
+    @foreach ($produks as $produk)
+    <div class="col-lg-4 col-md-4 col-sm-6 p-2">
+        <div class="card " style="width: 18rem;">
+            @if ($produk->gambar==0)
+            <img src="https://cdn3.iconfinder.com/data/icons/start-up-4/44/box-512.png"
+          class="card-img-top" >
+            @else
+            <img src="{{Storage::url("$produk->gambar") }}"
+          class="card-img-top" >
+            @endif
+            {{-- <img src="{{ Str::contains($produk->gambar, 'pixabay') ? $produk->gambar : asset($produk->gambar)}}" alt="..."> --}}
+            <div class="card-body">
+              <h5 class="card-title">{{ $produk->nama_produk }}</h5>
+              {{-- <p class="card-text">Rp. {{ number_format($produk['harga'], 0, ',', '.') }}</p> --}}
+              <p   class="btn btn-primary">Rp. {{ number_format($produk['harga'], 0, ',', '.') }}</p>
+            </div>
+          </div>
+    </div>
+      @endforeach
+    </div>
+    @endif
+
 @endsection

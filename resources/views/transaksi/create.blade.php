@@ -18,7 +18,7 @@
                         <select name="produks_id[]" class="form-control" multiple>
                             @foreach ($produk as $pd)
                                 <option value="{{ $pd['id'] }}">
-                                    {{ $pd['id'] }} ({{ $pd['nama_produk'] }})
+                                    {{ $loop->iteration }} ({{ $pd['nama_produk'] }})
                                 </option>
                             @endforeach
                         </select>

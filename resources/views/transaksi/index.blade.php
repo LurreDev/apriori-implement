@@ -45,7 +45,7 @@
                         <th>No</th>
                         <th>ID Transaksi</th>
                         @foreach ($produks as $produk)
-                            <th>Produk {{ $produk->id }}</th>
+                            <th>Produk {{ $loop->iteration }}</th>
                         @endforeach
                         <th>Action</th>
                     </tr>

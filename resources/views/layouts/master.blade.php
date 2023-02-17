@@ -71,6 +71,9 @@
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
+
+    <link rel="stylesheet" href="https:////cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+
 </head>
 
 <body>
@@ -103,20 +106,30 @@
                                     <div data-i18n="Account">Produk</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            {{-- <li class="menu-item">
                                 <a href="{{ route('algoritma.apriori') }}" class="menu-link">
                                     <div>Lihat Apriori</div>
                                 </a>
-                            </li>
+                            </li> --}}
                             @if (auth()->user()->role === 'admin')
-                                <li class="menu-item">
+                                {{-- <li class="menu-item">
                                     <a href="{{ route('edit-var.index') }}" class="menu-link">
                                         <div>Ubah confidence dan support</div>
                                     </a>
+                                </li> --}}
+                                <li class="menu-item">
+                                    <a href="{{ url('/app/apriori/setup') }}" class="menu-link">
+                                        <div data-i18n="Notifications">Proses Apriori</div>
+                                    </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="{{ route('transaksi.index') }}" class="menu-link">
-                                        <div data-i18n="Notifications">Transaksi</div>
+                                    <a href="{{ url('/app/apriori/riwayatAnalisa') }}" class="menu-link">
+                                        <div data-i18n="Notifications">riwayatAnalisa</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ url('/app/penjualan/data') }}" class="menu-link">
+                                        <div data-i18n="Notifications">Transaksi Penjualan</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
@@ -125,6 +138,20 @@
                                     </a>
                                 </li>
                             @endif
+
+                            @if (auth()->user()->role === 'user')
+                            <li class="menu-item">
+                                <a href="{{ url('/app/apriori/setup') }}" class="menu-link">
+                                    <div data-i18n="Notifications">Proses Apriori</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ url('/app/apriori/riwayatAnalisa') }}" class="menu-link">
+                                    <div data-i18n="Notifications">riwayatAnalisa</div>
+                                </a>
+                            </li>
+                           
+                        @endif
                         </ul>
                     </li>
 

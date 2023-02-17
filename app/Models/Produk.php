@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
-    use HasFactory;
-
-    protected $guarded = [];
+    protected $table = "tbl_produk";
+    protected $fillable = [
+        'kd_produk',
+        'nama_produk',
+        'harga',
+        'gambar',
+        'kd_kategori',
+        'active'
+    ];
 }

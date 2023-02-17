@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProdukController extends Controller
 {
@@ -36,9 +37,11 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         Produk::create([
+            'kd_produk' => Str::uuid(),
             'gambar' => $request->file('gambar')->store('public/files'),
             'nama_produk' => $request->nama_produk,
             'harga' => $request->harga,
+            'active' => 1,
         ]);
 
         return redirect('produk');
