@@ -153,7 +153,7 @@
                             Apabila pelanggan membeli <b>{{ $is -> dataProduk($is -> kd_barang_a) -> nama_produk }}</b>, 
                             maka pelanggan juga akan membeli <b>{{ $is -> dataProduk($is -> kd_barang_b) -> nama_produk }}</b>
                         </td>
-                        <td>{{ $is -> support }} %</td>
+                        <td>{{ floor($is -> support) }} %</td>
                     </tr>
                     @endforeach
                     </tbody>

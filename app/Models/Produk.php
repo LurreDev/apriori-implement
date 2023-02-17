@@ -13,7 +13,6 @@ class Produk extends Model
         'nama_produk',
         'harga',
         'gambar',
-        'kd_kategori',
         'active'
     ];
 }
