@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($produks as $produk)
+                    @forelse($produks as $produk)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -71,7 +71,11 @@
 
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Tidak ada product</strong>
+                        </div>
+                        @endforelse
                 </tbody>
             </table>
         </div>
@@ -83,8 +87,7 @@
     @if(Auth::user()->role == 'user')
 
     <div class="row">
-
-    @foreach ($produks as $produk)
+        @forelse($produks as $produk)
     <div class="col-lg-4 col-md-4 col-sm-6 p-2">
         <div class="card " style="width: 18rem;">
             @if ($produk->gambar==0)
@@ -102,7 +105,11 @@
             </div>
           </div>
     </div>
-      @endforeach
+    @empty
+    <div class="alert alert-warning" role="alert">
+        <strong>Tidak ada product</strong>
+    </div>
+    @endforelse
     </div>
     @endif
 
